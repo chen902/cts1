@@ -29,7 +29,7 @@ public class Node {
 	}
 	
 	// Returns the binary value of the current Node 
-	// 0, 1 or '-1' for an error (where the node is not a child of its parent, for some reason)
+	// 0, 1 or '-1' for an error (where the node is not a child of its parent)
 	public int getBinaryValue() {
 		if(this.parentNode != null) {
 			if(this.parentNode.getNode(true) == this)

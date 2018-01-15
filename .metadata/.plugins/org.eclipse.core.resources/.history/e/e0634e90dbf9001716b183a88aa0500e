@@ -1,4 +1,5 @@
-public class Node {
+public class
+Node {
 
 	private double frequency;
 	private Node parentNode;
@@ -10,6 +11,7 @@ public class Node {
 		this.frequency = frequency;
 		this.symbol = symbol;
 	}
+
 	
 	public Node(Node trueNode, Node falseNode) {
 		this.trueNode = trueNode;
@@ -28,8 +30,6 @@ public class Node {
 		return nodeType ? trueNode : falseNode;
 	}
 	
-	// Returns the binary value of the current Node 
-	// 0, 1 or '-1' for an error (where the node is not a child of its parent, for some reason)
 	public int getBinaryValue() {
 		if(this.parentNode != null) {
 			if(this.parentNode.getNode(true) == this)
@@ -60,5 +60,19 @@ public class Node {
 			current = current.parentNode;
 		}
 		return new StringBuilder(output).reverse() + " - " + this.symbol;
-	}	
+	}
+	
+	// Just an attempt to print, doesn't look very good
+	public void print() {
+		Node[] children = getChildNodes();
+		if(children != null) {
+			System.out.println("--" + children[0].frequency + "--");
+			System.out.println("--" + children[1].frequency + "--");
+			children[0].print();
+			children[1].print();
+		}
+		else {
+			System.out.println("--" + this.frequency + "--" + this.symbol + "\n");
+		}
+	}
 }
