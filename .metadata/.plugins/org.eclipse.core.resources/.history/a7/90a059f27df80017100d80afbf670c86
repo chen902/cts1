@@ -1,0 +1,34 @@
+
+public class Main {
+
+	public static void main (String[] args) {
+		
+		int[] values = new int[1000];
+
+		InsertionSort.randomlyInitialize(values, 10000);
+	    
+	    // print out the array
+	    System.out.println("Before: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+	    // sort the array
+	   InsertionSort.sort(values);
+	  
+	    // print out the array
+	    System.out.println("\nAfter: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+	    
+	    //print out how much time it took to sort
+	    
+	    System.out.println("\nSorting speed: " + values.length + ": " + InsertionSort.sortSpeed(values) + " s");
+	    
+	    //If there is an error
+	    
+	    if (!InsertionSort.isSorted(values))
+			System.out.println("Sort method doesn't work ...");
+	 
+	}
+}

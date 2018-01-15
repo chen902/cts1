@@ -1,0 +1,24 @@
+
+public class Main {
+
+	public static void main (String[] args) {
+		
+		int[] values = new int[200000];
+
+		InsertionSort.randomlyInitialize(values, Integer.MAX_VALUE);
+	    System.out.println("Sorting...");
+	    // print out the array
+		long beginTimestamp = System.currentTimeMillis();
+
+		InsertionSort.sort(values);
+
+		long endTimestamp = System.currentTimeMillis();
+
+		// sort the array
+		System.out.println("Sorting took " + (endTimestamp - beginTimestamp)/1000 +  " seconds!");	   
+		
+		for (int i=0; i<values.length;i++) {
+			System.out.println(values[i]);
+		}
+	}
+}

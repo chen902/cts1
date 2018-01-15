@@ -1,0 +1,25 @@
+
+public class Main {
+
+	public static void main (String[] args) {
+		
+		int[] values = new int[100000];
+
+		InsertionSort.randomlyInitialize(values, Integer.MAX_VALUE);
+	    
+	    // print out the array
+	    System.out.println("Before: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+	    // sort the array
+	   InsertionSort.sort(values);
+	  
+	    // print out the array
+	    System.out.println("\nAfter: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+	    	 
+	}
+}

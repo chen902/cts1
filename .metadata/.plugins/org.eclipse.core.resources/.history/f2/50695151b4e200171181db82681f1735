@@ -1,0 +1,94 @@
+
+public class BaseConverter {
+	
+	// This array is used for integer-to-string and string-to-integer conversion operations.
+	public static String[] digits = {"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"};
+	
+	// TODO: add comments regarding the algorithm
+	public static String toString(int value, int radix) {
+		String output = "";
+		int result = value;
+		int reminder;
+		
+		// As long as the result portion of the division is larger/equal to the base
+		// the reminder is appended to the output
+		do {
+			reminder = result % radix;
+			result /= radix;
+			output = getDigit(reminder) + output;
+		}
+		while (result >= radix);
+		
+		// Appending the last division result to the output
+		if(result > 0) { 
+			output = getDigit(result) + output;
+		}
+
+		return output;
+	}
+
+	// TODO: add comments regarding the algorithm 
+	public static int toInt(String representation, int radix) {
+		int result;
+		// If number is NOT valid, set result to -1
+		if (!checkValidity(representation, radix)) {
+			result = -1;
+		}
+		// Otherwise, convert the number from original base 'radix' to base10
+		else {
+			result = 0; 
+			// Starting from index (MSB) incrementing towards the LSB (end of string)
+			// Exponent is initialized to the MSB exponent and decremented by one for each iteration 
+			for(int index=0, exponent=representation.length()-1; index<representation.length();index++,exponent--) {
+				int valueOfDigit = getDigit(String.valueOf(representation.charAt(index)));
+				result += valueOfDigit *  power(radix,exponent);
+			}
+		}
+		return result;
+		
+	}
+	
+	// TODO: Implement
+	// This method gets the string representation of a number and a counting base and returns 'true' if
+	// number is valid in the given base or 'false' otherwise
+	// Negative numbers are also invalid
+	private static boolean checkValidity(String representation, int radix) {
+		//TODO: Implement
+		
+		return true;
+	}
+
+	// Returns the string representation of a number between 0 and f 
+	private static String getDigit(int number) {
+		// if the integer number is within range i.e valid in base 2-16 fetch the digit 
+		return (number <= 15 && number >= 0) ? digits[number] : "-1";
+	}
+	
+	// Returns the integer representation of a string digit between 0 and f
+	// if it is not valid -1 is returned
+	private static int getDigit(String number) {
+		boolean found=false;
+		int value = -1;
+0		for(int i=0; i<digits.length;i++)
+			if(number.equals(digits[i]) || found) {
+				//returning the index rather than the value
+				value = i; 
+				found=true;
+			}
+		return value;
+	}
+
+	// Gets an integer 'base' and integer 'exponent' and returns the number to the power of exponent 
+	// Implemented as part of exersice 2 of "Methods" exercise sheet
+	private static int power(int base, int exponent) {
+		int result=1;
+
+		for(int i=0; i<exponent; i++) {
+			result *= base;
+		}
+		
+		return result;
+	}
+
+
+}

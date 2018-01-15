@@ -1,0 +1,22 @@
+
+public class Main {
+	// TODO: Write down a set of test for both methods
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		int number = Terminal.getInt("Please type in a number: ");
+//		int radix = Terminal.getInt("Enter base: "); 
+		
+//		System.out.println(BaseConverter.toString(number, radix));
+		System.out.println(BaseConverter.toString(4711, 10)); 
+		System.out.println(BaseConverter.toString(123, 16));
+		System.out.println(BaseConverter.toString(1023, 2));
+		System.out.println(BaseConverter.toString(0, 12));
+		System.out.println(BaseConverter.toString(4711, 10));
+		System.out.println(BaseConverter.toInt("34", 10));
+		System.out.println(BaseConverter.toInt("af", 16));
+		System.out.println(BaseConverter.toInt("-3", 10));
+		System.out.println(BaseConverter.toInt("262", 6));
+		
+	}
+
+}
