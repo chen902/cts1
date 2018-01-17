@@ -75,6 +75,24 @@ public class Tree {
 		this.treeNodes[secondLeaf] = temp;
 	}
 
+	// Returns a double representing the sum of all frequencies of the leaves
+	public double sumOfFrequencies() {
+		double output = 0.0;
+		for(int i=0; i<this.treeNodes.length; i++) {
+			output += this.treeNodes[i].getFrequency();
+		}
+
+		return output;
+	}
+
+	public char symbolDecode(String binary) {
+		//TODO: input validity check 
+		for(int index=0; index < binary.length(); index++) {
+			//this.rootNode.getNode(Integer.getInteger(binary.charAt(index)));
+		}
+		return 'x';
+	}
+	
 	public String toString() {
 		String output = "";
 		
@@ -84,13 +102,4 @@ public class Tree {
 		return output;
 	}
 
-	// Returns a double representing the sum of all frequencies of the leaves
-	public double sumOfFrequencies() {
-		double output = 0.0;
-		for(int i=0; i<this.treeNodes.length; i++) {
-			output += this.treeNodes[i].getFrequency();
-		}
-
-		return output;
-	}	
 }

@@ -10,7 +10,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Prime" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/BaseConverter" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Prime_recursive" type="4"/>
-<item elementID="=Huffman" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Huffman" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Rand_average" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/SquareRoot" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/StringChallenge" type="4"/>
