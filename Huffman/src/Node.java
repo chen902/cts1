@@ -30,7 +30,7 @@ public class Node {
 	
 	// Returns the binary value of the current Node 
 	// 0, 1 or '-1' for an error (where the node is not a child of its parent, for some reason)
-	public int getBinaryValue() {
+	private int getRelativeBinaryValue() {
 		if(this.parentNode != null) {
 			if(this.parentNode.getNode(true) == this)
 				return 1;
@@ -40,6 +40,17 @@ public class Node {
 		// -1 means error
 		return -1;
 	}
+	
+	public String getBinaryRepresentation() {
+		String output="";
+		Node current = this;
+		while (current.parentNode != null) {
+			output += current.getRelativeBinaryValue();
+			current = current.parentNode;
+		}
+		return new StringBuilder(output).reverse().toString();
+	}
+	
 	public Node[] getChildNodes() {
 		Node[] childNodes = null;
 		
@@ -51,14 +62,12 @@ public class Node {
 		return childNodes;
 	}
 	
+	public char getSymbol() {
+		return this.symbol;
+	}
+	
 	public String toString() {
 		// Going up the tree, concatenating the binary values of the nodes 
-		String output="";
-		Node current = this;
-		while (current.parentNode != null) {
-			output += current.getBinaryValue();
-			current = current.parentNode;
-		}
-		return new StringBuilder(output).reverse() + " - " + this.symbol;
+		return getBinaryRepresentation() + " - " + this.symbol;
 	}	
 }

@@ -16,23 +16,23 @@ public class Tree {
 		return this.rootNode;
 	}
 
+	// Create first Node of two rarest symbols and 
+	// Until Node frequency is equal to 1.0 
+	// create n-1 array with new Node and the rest of the leaves
+	// sort new array 
+	// Create another node from two rarest symbols
 	private void constructTree() {
-		// Create first Node of two rarest symbols and 
-		// Until Node frequency is equal to 1.0 
-		// create n-1 array with new Node and the rest of the leaves
-		// sort new array 
-		// Create another node from two rarest symbols
 		sortLeaves();
-
 		Node currentNode;
-
-		do{
-			currentNode = new Node(this.treeNodes[0], this.treeNodes[1]);
-			addNewNode(currentNode);
-		}
-		while (currentNode.getFrequency() < 1.0);
-
-		this.rootNode = currentNode;
+		int index = 0;
+			do{
+				// Create a new node with the next two least frequent nodes as its children
+				currentNode = new Node(this.treeNodes[0], this.treeNodes[1]); 
+				addNewNode(currentNode);
+			}
+			while (this.treeNodes.length > 1); // Until there is only one root node
+			this.rootNode = currentNode;
+			index++;
 	}
 
 	// A utility for the constructTree methos
@@ -81,7 +81,6 @@ public class Tree {
 		for(int i=0; i<this.treeNodes.length; i++) {
 			output += this.treeNodes[i].getFrequency();
 		}
-
 		return output;
 	}
 
@@ -102,4 +101,12 @@ public class Tree {
 		return output;
 	}
 
+	public Node getNode(char symbol) {
+		Node node = null; 
+		for(int index=0; index < this.leaves.length; index++) {
+			if(this.leaves[index].getSymbol() == symbol)
+				node = this.leaves[index];
+		}
+		return node;
+	}
 }
