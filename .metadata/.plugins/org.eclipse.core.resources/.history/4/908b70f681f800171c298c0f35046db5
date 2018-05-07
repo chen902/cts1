@@ -1,0 +1,31 @@
+
+public class Main {
+
+	public static void main (String[] args) {
+		
+		int[] values = new int[100000];
+
+		InsertionSort.randomlyInitialize(values, Integer.MAX_VALUE);
+	    
+	    // print out the array
+	    System.out.println("Before: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+		long beginTimestamp = System.currentTimeMillis();
+
+		InsertionSort.sort(values);
+
+		long endTimestamp = System.currentTimeMillis();
+
+		// sort the array
+		System.out.println(endTimestamp - beginTimestamp);
+	  
+	    // print out the array
+	    System.out.println("\nAfter: "); 
+	    for ( int val : values ) {
+	      System.out.print( val + ", " ); 
+	    }
+	    	 
+	}
+}

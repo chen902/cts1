@@ -1,0 +1,57 @@
+
+public class BaseConverter {
+
+	public static void main(String[] args) {
+		int number = Terminal.getInt("Please type in a number: ");
+		
+		System.out.println(toString(number, 16));
+	}
+
+	public static String toString(int value, int radix) {
+		String output = "";
+		int result = value;
+		int reminder;
+		
+		do {
+			result = value / radix;
+			reminder = value % radix;
+			output = getDigit(reminder) + output;
+		}
+		while (result >= radix);
+		
+		output = getDigit(result) + output;
+
+		return output;
+	}
+
+	public static int toInt(String representation, int radix) {
+		return 0;
+	}
+
+	// Returns the string representation of a number between 0 and f 
+	private static String getDigit(int number) {
+		String result = "-1";
+
+		if (number < 9 && number >= 0) {
+			result = String.valueOf(number);
+		}
+		else {
+			switch(number) {
+			case 10: result = "a";
+			break;
+			case 11: result = "b";
+			break;
+			case 12: result = "c";
+			break;
+			case 13: result = "d";
+			break;
+			case 14: result = "e";
+			break;
+			case 15: result = "f";
+			break;
+			}
+		}
+
+		return result;
+	}
+}

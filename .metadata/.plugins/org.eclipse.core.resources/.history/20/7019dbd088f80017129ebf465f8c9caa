@@ -1,0 +1,51 @@
+//****************************************************************************
+//Course	: Programming 1 (CTS1)
+//Task  	: Monitored assignment 2
+//Professor : Kratzer
+//Authors	: Alex Simeonova, Chen Kasirer, Jason Kiesl
+//****************************************************************************
+//Base Converter converts between counting bases using two main public methods
+//****************************************************************************
+//toString(int value, int radix)
+//Parameters:
+//value = an integer in base 10
+//radix = an integer the destination base
+//Return value: a string representing the value in the requested base
+//Usage: System.out.println(BaseConverter.toString(123, 16)); -> "7b"
+//****************************************************************************
+
+import java.util.Random;
+
+public abstract class IntArrayMethods {
+
+	public static void insertionSort(int[] list)
+	{
+		//  For each unsorted integer
+		for (int i= 1; i< list.length; i++)
+		{
+			//   keep swapping with its left neighbor 
+			//  until it is larger or equal to left neighbor
+			int temp;
+			for (int j = i; j > 0 && list[j-1] > list[j]; j--)
+			{
+				temp  = list[j-1];
+				list[j-1] = list[j];
+				list[j]   = temp;
+			}
+		}  
+	}
+
+	public static void randomlyInitialize(int[] arr, int upperBound) {
+		Random random = new Random();
+		// initializes all components of array with initialValue
+		for (int i = 0; i < arr.length; ++i)
+			arr[i] = random.nextInt(upperBound);
+	}
+
+	public static boolean isSorted(int[] arr) {
+		for (int i = 0; i < arr.length-1; ++i)
+			if (arr[i] > arr[i+1])
+				return false;
+		return true;
+	}
+}

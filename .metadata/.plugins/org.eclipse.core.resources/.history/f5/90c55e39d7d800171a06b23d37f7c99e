@@ -1,0 +1,48 @@
+
+public class BaseConverter {
+
+	public static void main(String[] args) {
+		int number = Terminal.getInt("Please type in a number: ");
+		
+		System.out.println(getDigit(number));
+	}
+
+	public static String toString(int value, int radix) {
+		String result = "";
+
+		int reminder;
+
+		return result;
+	}
+
+	public static int toInt(String representation, int radix) {
+		return 0;
+	}
+
+	// Returns the string representation of a number between 1 and f 
+	private static String getDigit(int number) {
+		String result = "-1";
+
+		if (number < 9) {
+			result = String.valueOf(number);
+		}
+		else {
+			switch(number) {
+			case 10: result = "a";
+			break;
+			case 11: result = "b";
+			break;
+			case 12: result = "c";
+			break;
+			case 13: result = "d";
+			break;
+			case 14: result = "e";
+			break;
+			case 15: result = "f";
+			break;
+			}
+		}
+
+		return result;
+	}
+}

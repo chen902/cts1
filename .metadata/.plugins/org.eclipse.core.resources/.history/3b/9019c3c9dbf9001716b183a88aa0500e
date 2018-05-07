@@ -1,0 +1,62 @@
+public class Node {
+
+	private double frequency;
+	private Node parentNode;
+	private Node trueNode;
+	private Node falseNode;
+	private char symbol; 
+
+	public Node(double frequency, char symbol) {
+		this.frequency = frequency;
+		this.symbol = symbol;
+	}
+	
+	public Node(Node trueNode, Node falseNode) {
+		this.trueNode = trueNode;
+		this.falseNode = falseNode;
+		this.frequency = trueNode.getFrequency() + falseNode.getFrequency();
+		this.trueNode.parentNode = this;
+		this.falseNode.parentNode = this;
+	}
+	
+	public double getFrequency() {
+		return this.frequency;
+	}
+	
+	// Get a boolean representing 0 or 1 and return the corresponding child node
+	public Node getNode(boolean nodeType) {
+		return nodeType ? trueNode : falseNode;
+	}
+	
+	public int getBinaryValue() {
+		if(this.parentNode != null) {
+			if(this.parentNode.getNode(true) == this)
+				return 1;
+			else
+				return 0;
+		}
+		// -1 means error
+		return -1;
+	}
+	public Node[] getChildNodes() {
+		Node[] childNodes = null;
+		
+		if(this.falseNode != null) {
+			childNodes = new Node[2]; 
+			childNodes[0] = falseNode;
+			childNodes[1] = trueNode;
+		}
+		return childNodes;
+	}
+	
+	public String toString() {
+		// Going up the tree, concatenating the binary values of the nodes 
+		String output="";
+		Node current = this;
+		while (current.parentNode != null) {
+			output += current.getBinaryValue();
+			current = current.parentNode;
+		}
+		return new StringBuilder(output).reverse() + " - " + this.symbol;
+	}	
+}

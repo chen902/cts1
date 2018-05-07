@@ -1,0 +1,44 @@
+import java.util.Random;
+
+public class InsertionSort {
+
+	public static void sort (int[] list)
+	{
+		//  For each unsorted integer
+		for (int i= 1; i< list.length; i++)
+		{
+			//   keep swapping with its left neighbor 
+			//  until it is larger or equal to left neighbor
+			int temp;
+			for (int j = i; j > 0 && list[j-1] > list[j]; j--)
+			{
+				temp  = list[j-1];
+				list[j-1] = list[j];
+				list[j]   = temp;
+			}
+		}  
+	}
+
+
+	private static Random random = new Random();
+
+	public static void initialize(int[] arr, int initialValue) {
+		// initializes all components of array with initialValue
+		for (int i = 0; i < arr.length; ++i)
+			arr[i] = initialValue;
+	}
+
+	public static void randomlyInitialize(int[] arr, int upperBound) {
+		// initializes all components of array with initialValue
+		for (int i = 0; i < arr.length; ++i)
+			arr[i] = random.nextInt(upperBound);
+	}
+
+
+	public static boolean isSorted(int[] arr) {
+		for (int i = 0; i < arr.length-1; ++i)
+			if (arr[i] > arr[i+1])
+				return false;
+		return true;
+	}
+}
