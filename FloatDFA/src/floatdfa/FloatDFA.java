@@ -22,11 +22,28 @@ public class FloatDFA {
         if (FloatDFA.accept(word)) 
             System.out.println(word + " Accepted!");
 
-        word = "12.432";
+        word = "5.432";
+
+        if (FloatDFA.accept(word)) 
+            System.out.println(word + " Accepted!");
+        word = "123.4500";
+
+        if (FloatDFA.accept(word)) 
+            System.out.println(word + " Accepted!");
+        word = "2.345e6";
+
+        if (FloatDFA.accept(word)) 
+            System.out.println(word + " Accepted!");
+        word = "0.20E+678";
+
+        if (FloatDFA.accept(word)) 
+            System.out.println(word + " Accepted!");
+        word = "1004.5e-6789";
+
         if (FloatDFA.accept(word)) 
             System.out.println(word + " Accepted!");
 
-        word = "12.4325ef66";
+        word = "0.4325ef66";
         if (FloatDFA.accept(word)) 
             System.out.println(word + " Accepted!");
 
@@ -45,8 +62,6 @@ public class FloatDFA {
         word = "12.5e+";
         if (FloatDFA.accept(word)) 
             System.out.println(word + " Accepted!");
-
-
     }
 
     public static boolean accept(String word) {
@@ -61,8 +76,7 @@ public class FloatDFA {
                     // function [0-9] -> state 1
                     if (Character.isDigit(ch)) {     
                         state = 1;
-                    } 
-                    else{
+                    } else{
                         System.out.println("Error! For word: "+ word +posIndicator(position)+"Expected a digit is position: " + position);
                         return false;                        
                     }
@@ -81,8 +95,7 @@ public class FloatDFA {
                     // function [0-9] -> state 3
                     if(Character.isDigit(ch)){
                        state = 3; 
-                    }
-                    else {
+                    } else {
                         System.out.println("Error! For word: "+ word +posIndicator(position)+"Expected a digit is position: " + position);
                         return false;
                     }
@@ -100,11 +113,11 @@ public class FloatDFA {
                 case 4:
                     // function +,- -> state 5
                     // function [0-9] -> state 6
-                    if(ch == '+' || ch == '-')
+                    if(ch == '+' || ch == '-'){
                         state = 5;
-                    else if(Character.isDigit(ch)){
+                    } else if(Character.isDigit(ch)){
                         state = 6;
-                    }else{
+                    } else{
                         System.out.println("Error! For word: "+ word + posIndicator(position)+"Expected '+/-' or a digit in position: " + position);
                         return false;                    
                     }
@@ -127,7 +140,6 @@ public class FloatDFA {
                     break;
             }
         }
-        //System.out.println("Ended in state " + state);
         return isAcceptState(state);
     }
     
@@ -140,7 +152,7 @@ public class FloatDFA {
         return "\n" + result;
     }
     
-    // accept states are 2 and 4
+    // accept states are 3 and 6
     private static boolean isAcceptState(int state) {
         return (state == 3) || (state == 6);
     }
