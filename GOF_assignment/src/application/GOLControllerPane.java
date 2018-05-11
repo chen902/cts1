@@ -9,6 +9,7 @@ import java.io.File;
 
 import foundation.GOLBoard;
 import foundation.GOLFileException;
+import java.io.FileNotFoundException;
 
 public class GOLControllerPane extends VBox {
 
@@ -50,6 +51,7 @@ public class GOLControllerPane extends VBox {
                     canvas.show(currentBoard);
                 } catch (GOLFileException e) {
                     new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
+                    //throw new GOLFileException("error");
                 }
             }
         });
