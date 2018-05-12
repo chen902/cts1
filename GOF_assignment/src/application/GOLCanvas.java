@@ -28,7 +28,37 @@ public class GOLCanvas extends Canvas {
         // Alex: implement drawing on the canvas according to the layout of the board
         //******************************************************************
 		
-		clear();
+		
+
+		//sample array
+		char[][] array = {{'+', '.', '+','+','.','.','.','+'},
+						{'+', '.', '.','+','.','+','.','+'},
+						{'.','+', '.','.','.','.','.','+'}};
+
+		//sample initial x, y values (to be implemented when centering image on board)
+		int XCOORDINATE = 80;
+		int YCOORDINATE = 90; 
+
+		//for loop to traverse array 
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+			if (array[i][j] == GOLBoard.REPRESENTATIONLIVECELL) {
+				//draw rectangles on canvas if cell is alive
+				
+				gc.setStroke(Color.BLACK);
+				gc.strokeRect(XCOORDINATE, YCOORDINATE, CELLSIZE, CELLSIZE);
+				XCOORDINATE += CELLSIZE+GAP;
+				
+				//if cell is dead display empty space 
+			} 
+			else if (array[i][j] == GOLBoard.REPRESENTATIONDEADCELL) {
+				gc.clearRect(XCOORDINATE, YCOORDINATE, CELLSIZE, CELLSIZE);
+				XCOORDINATE += CELLSIZE+GAP;
+			} 
+		}
+			XCOORDINATE = 80; //need to create a valuable for the original x coordinate when we center image 
+			YCOORDINATE += CELLSIZE+GAP; //move onto the next line
+		}
 		
 	}
 
