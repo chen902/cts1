@@ -8,12 +8,13 @@ import java.util.regex.Pattern;
 
 
 public class GOLBoard {
-    private static final String ERROR_MESSAGE = "File is invalid!";
-    public static final int CELLSHORIZONTAL = 50;
-    public static final int CELLSVERTICAL = 50;
+    public static final int CELLSHORIZONTAL = 12;
+    public static final int CELLSVERTICAL = 11;
     public static final char REPRESENTATIONLIVECELL = '+';
     public static final char REPRESENTATIONDEADCELL = '.';
-
+    
+    private String error_message;
+    
     public CellState[][] board = new CellState[CELLSHORIZONTAL][CELLSVERTICAL];
 
     public GOLBoard() {
@@ -56,24 +57,25 @@ public class GOLBoard {
                 fileLines.add(line);	
             }
         } catch (IOException e) {
-            throw new GOLFileException(ERROR_MESSAGE);
+            throw new GOLFileException(error_message);
         } finally {
             if(reader != null)
                 try{
                     reader.close();
                 }catch(IOException e){
-                    throw new GOLFileException(ERROR_MESSAGE);
+                    throw new GOLFileException(error_message);
                 }
         }
         
         // Check file validity and in case it is not valid throw a GOLFileException
         if (!isValid(fileLines.getArray())) {
-            throw new GOLFileException(ERROR_MESSAGE);
+            throw new GOLFileException(error_message);
         }
 
         int offsetX = (CELLSHORIZONTAL - fileLines.getString(0).length()) / 2;        
         int offsetY = (CELLSVERTICAL - fileLines.length() ) / 2;
         
+        // Load file content into the board in a centered manner
         for(int y = 0; y<fileLines.length(); y++){
             for(int x = 0; x<fileLines.getString(0).length(); x++){
                 if(fileLines.getString(y).charAt(x) == REPRESENTATIONLIVECELL)
@@ -81,15 +83,13 @@ public class GOLBoard {
             }
         }
 
-        printArray(board);
+        //printArray(board);
         //******************************************************************
         // Jason: spawn the content of the file onto the center of the board
         // hint: translate REPRESENTATIONLIVECELL and REPRESENTATIONDEADCELL to CellState in the right places on the 'board'
         // Centering formula = (width_conf_file - width_board) / 2
         //			(height_conf_file - height_board) / 2
-        //******************************************************************
-        
-        
+        //******************************************************************     
     }
     
     private void printArray(Object[][] array){
@@ -124,21 +124,27 @@ public class GOLBoard {
     // validates the board file, returns false in any case of an unsupported element
     private boolean isValid(String[] board) {
         // Checks if file is not empty, and that it does not exceed the allowed dimensions
-        if(board.length == 0 || board.length > CELLSVERTICAL || board[0].length() > CELLSHORIZONTAL)
+        if(board.length == 0 || board.length > CELLSVERTICAL || board[0].length() > CELLSHORIZONTAL){
+            error_message = "File exceeds the allowed dimensions.";
             return false;
+        }
         
         // Checks if line lengths vary
         for (int i = 0; i < board.length - 1; i++) {
-            if (board[i].length() != board[i + 1].length())	// if length of current line varies from the length of the next one then not valid
+            if (board[i].length() != board[i + 1].length()){	// if length of current line varies from the length of the next one then not valid
+                error_message = "Line lengths are not allowed to vary.";
                 return false;
+            }
         }
                 
         // Verifying that all lines contain valid characters using a regular expression
         for (String line : board) {
             // regex = /[+.]+/
             String regex = "[" + REPRESENTATIONLIVECELL + REPRESENTATIONDEADCELL + "]" + "+";
-            if (!Pattern.matches(regex, line))
+            if (!Pattern.matches(regex, line)){
+                error_message = "File contains illegal characters.";
                 return false;
+            }
         }
         
         // if reached here, file is valid
