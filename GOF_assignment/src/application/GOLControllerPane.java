@@ -6,10 +6,8 @@ import javafx.scene.control.*;
 import javafx.event.*;
 import java.io.File;
 
-
 import foundation.GOLBoard;
 import foundation.GOLFileException;
-import java.io.FileNotFoundException;
 
 public class GOLControllerPane extends VBox {
 
@@ -35,23 +33,20 @@ public class GOLControllerPane extends VBox {
                         new FileChooser.ExtensionFilter("GOL", "*.gol"),
                         new FileChooser.ExtensionFilter("All Files", "*.*")
                 );
-                
+
                 File file = fileChooser.showOpenDialog(btnLoad.getScene().getWindow());
                 if (file == null) {
                     return;
                 }
 
-                // Instead of reading here, make a GOLBoard object 
-                // using constructor GOLBoard(String filename)
                 try {
                     // Initialize the board using a file
                     currentBoard = new GOLBoard(file.getName());
-                    
+
                     // Draw canvas according to the new board
                     canvas.show(currentBoard);
                 } catch (GOLFileException e) {
                     new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).show();
-                    //throw new GOLFileException("error");
                 }
             }
         });
@@ -61,7 +56,6 @@ public class GOLControllerPane extends VBox {
         // Add them to the box. 
         getChildren().addAll(btnLoad);
         canvas.show(currentBoard);
-
     }
 
 }

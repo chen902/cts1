@@ -23,12 +23,10 @@ public class GOLCanvas extends Canvas {
 
     // shows the contents of 'board' on the canvas
     public void show(GOLBoard board) {
-        //******************************************************************
-        // Alex: implement drawing on the canvas according to the layout of the board
-        //******************************************************************
+        // clearing board before drawing new content
         clear();
 
-        // Draw board onto the canvas 
+        // Loop through the board and draw any live cells
         for (int y = 0; y < GOLBoard.CELLSVERTICAL; y++) {
             for (int x = 0; x < GOLBoard.CELLSHORIZONTAL; x++) {
                 if (board.getCellState(x, y) == CellState.LIVE) 

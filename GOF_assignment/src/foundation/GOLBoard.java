@@ -17,10 +17,12 @@ public class GOLBoard {
     
     public CellState[][] board = new CellState[CELLSHORIZONTAL][CELLSVERTICAL];
 
+    // Default constructor, initializes an all-dead cells board
     public GOLBoard() {
         clearBoard();
     }
     
+    // Initializes all cells of the board to be 'DEAD'
     private void clearBoard(){
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0; j < board[i].length; ++j) {
@@ -39,21 +41,24 @@ public class GOLBoard {
     // - the text lines have a length of 0 or > CELLSHORIZONTAL
     // - there are more lines than CELLSVERTICAL
     public GOLBoard(String filename) throws GOLFileException{
+        // Initialize board 
         clearBoard();
         
         File file = new File(filename);
-        //String[] fileLines = new String[1];
+       
+        // This dynamic data structor is used to store the lines of the file after reading
+        // allows the program to analize the file content while only reading it from the disk once
         DynamicStringArray fileLines = new DynamicStringArray();
+        
         BufferedReader reader = null;
-        int lineIndex = 0;
 
         try {
             reader = new BufferedReader(new FileReader(file.getAbsolutePath()));
             String line;
             
-            // Reading the file into a string array 
+            // 'line' stores the current line read from the file
+            // it is then added to the dynamic string array to be analyzed later
             while ((line = reader.readLine()) != null) {
-                // String array is extended dynamically
                 fileLines.add(line);	
             }
         } catch (IOException e) {
@@ -67,11 +72,14 @@ public class GOLBoard {
                 }
         }
         
-        // Check file validity and in case it is not valid throw a GOLFileException
+        // isValid accepts the file content as a String array and checks for any predefined irregularities 
+        // if any issue is found, isValid returns 'false' and a GOLFileException is thrown 
         if (!isValid(fileLines.getArray())) {
             throw new GOLFileException(error_message);
         }
 
+        // These two variables are used to offset the indexes that are used to travers the file lines 
+        // into a centered location on the board 
         int offsetX = (CELLSHORIZONTAL - fileLines.getString(0).length()) / 2;        
         int offsetY = (CELLSVERTICAL - fileLines.length() ) / 2;
         
@@ -82,46 +90,10 @@ public class GOLBoard {
                     board[x+offsetX][y+offsetY] = CellState.LIVE; 
             }
         }
-
-        //printArray(board);
-        //******************************************************************
-        // Jason: spawn the content of the file onto the center of the board
-        // hint: translate REPRESENTATIONLIVECELL and REPRESENTATIONDEADCELL to CellState in the right places on the 'board'
-        // Centering formula = (width_conf_file - width_board) / 2
-        //			(height_conf_file - height_board) / 2
-        //******************************************************************     
     }
     
-    private void printArray(Object[][] array){
-        for(int y=0; y<array.length; y++){
-            for(int x=0; x<array[0].length; x++){
-                if(array[x][y] == CellState.LIVE)
-                    System.out.print('+');
-                else
-                    System.out.print(" ");
-            }
-            System.out.println("");
-        }
-    }
-
-//    // Implementing dynamic add of strings to a string array
-//    private String[] addLine(String[] file, String newLine) {
-//        String[] temp;
-//        // A temp array 1 string larger than the original is created 
-//        if (file[file.length - 1] != null) {
-//            temp = new String[file.length + 1];
-//            for (int index = 0; index < file.length; index++) {
-//                temp[index] = file[index];
-//            }
-//            temp[temp.length - 1] = newLine;
-//            file = temp;
-//        } else {
-//            file[file.length - 1] = newLine;
-//        }
-//        return file;
-//    }
-
-    // validates the board file, returns false in any case of an unsupported element
+    // Validates the board file, returns false in any case of an unsupported element
+    // 'error_message' is set in case of an error to provide description
     private boolean isValid(String[] board) {
         // Checks if file is not empty, and that it does not exceed the allowed dimensions
         if(board.length == 0 || board.length > CELLSVERTICAL || board[0].length() > CELLSHORIZONTAL){
