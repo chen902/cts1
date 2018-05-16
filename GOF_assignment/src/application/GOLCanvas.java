@@ -14,7 +14,7 @@ public class GOLCanvas extends Canvas {
     private GraphicsContext gc = null;
 
     public GOLCanvas() {
-        super(GOLBoard.CELLSHORIZONTAL * (CELLSIZE + GAP) + GAP, GOLBoard.CELLSVERTICAL * (CELLSIZE + GAP) + GAP);
+        super(GOLBoard.CELLSHORIZONTAL * (CELLSIZE + GAP) + 2*GAP, GOLBoard.CELLSVERTICAL * (CELLSIZE + GAP) + 2*GAP);
 
         // Get the graphics context for the canvas & clear. 
         gc = getGraphicsContext2D();
@@ -29,9 +29,16 @@ public class GOLCanvas extends Canvas {
         // Loop through the board and draw any live cells
         for (int y = 0; y < GOLBoard.CELLSVERTICAL; y++) {
             for (int x = 0; x < GOLBoard.CELLSHORIZONTAL; x++) {
-                if (board.getCellState(x, y) == CellState.LIVE) 
+                if (board.getCellState(x, y) == CellState.LIVE) {
                     // offseting to the canvas coordinates is achieved by 'cell_index*(overallsize)'
-                    gc.fillRect(x * (CELLSIZE + GAP), y * (CELLSIZE + GAP), CELLSIZE, CELLSIZE);
+                    gc.setFill(Color.BLACK);
+                    gc.fillRect(x * (CELLSIZE + GAP) + GAP, y * (CELLSIZE + GAP) + GAP, CELLSIZE, CELLSIZE);
+                } 
+//                else{
+//                    gc.setFill(Color.WHITE);
+//                    gc.fillRect(x * (CELLSIZE + GAP) + GAP, y * (CELLSIZE + GAP) + GAP, CELLSIZE, CELLSIZE);
+//                }
+                    
             }
         }
     }
